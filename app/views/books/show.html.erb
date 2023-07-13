@@ -1,7 +1,7 @@
+<%=flash[:notice] %>
 
-
-
-<%= render 'books/list', book: @new_book %>
+  <%= render 'users/list', user: @user %>
+  <%= render 'books/list', book: @new_book %>
 
 <div class="col-md-8" "offset-md-1">
   <h2>Book detail</h2>
@@ -18,10 +18,18 @@
         </th>
         
         <th><%= @book.body %></th>
+        
         <th><% if @book.user == current_user %>
-            <%= link_to "Edit", edit_book_path(@book) %>
+            <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success edit_book_91012" %>
             <% end %>
         </th>
+        
+         <th><% if @book.user == current_user %>
+            <%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "are you sure？"}, 
+            class: "btn btn-sm btn-danger destroy_book_91012" %>
+            <% end %>
+        </th>
+
       </tr>
     </thead>
   </table>
