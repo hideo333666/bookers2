@@ -1,36 +1,38 @@
 <%=flash[:notice] %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/list', user: @user, book: @book %>
+    </div>
 
-  <%= render 'users/list', user: @user %>
-  <%= render 'books/list', book: @new_book %>
-
-<div class="col-md-8" "offset-md-1">
-  <h2>Book detail</h2>
-  <% @book %>
-  <table>
-    <thead>
-      <tr>
-        <th>
-        </th>
-        
-        <th><%= link_to book_path(@book.id) do %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <% @book %>
+      <table class="table">
+        <thead>
+          <tr>
+            <td><%= image_tag @user.get_profile_image(100,100) %><br>
+                <%= link_to @user.name, user_path %>
+            </td>
+            <td><%= link_to book_path(@book.id) do %>
             <%= @book.title %>
             <% end %>
-        </th>
-        
-        <th><%= @book.body %></th>
-        
-        <th><% if @book.user == current_user %>
-            <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success edit_book_91012" %>
-            <% end %>
-        </th>
-        
-         <th><% if @book.user == current_user %>
-            <%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "are you sure？"}, 
-            class: "btn btn-sm btn-danger destroy_book_91012" %>
-            <% end %>
-        </th>
+            </td>
+            <td><%= @book.body %></td>
 
-      </tr>
-    </thead>
-  </table>
+            <td><% if @book.user == current_user %>
+            <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
+            <% end %>
+            </td>
+
+            <td><% if @book.user == current_user %>
+            <%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"},
+            class: "btn btn-sm btn-danger" %>
+            <% end %>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
 </div>
